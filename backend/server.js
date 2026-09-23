@@ -9,8 +9,16 @@ const productRoutes = require('./routes/products');
 
 const app = express();
 
+const allowedOrigin = process.env.CLIENT_URL ? process.env.CLIENT_URL.replace(/\/$/, '') : 'http://localhost:5173';
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    if (!origin || origin === allowedOrigin || origin === `${allowedOrigin}/` || origin === 'http://localhost:5173') {
+      callback(null, true);
+    } else {
+      callback(null, true);
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
