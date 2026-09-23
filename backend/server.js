@@ -29,3 +29,5 @@ mongoose.connect(MONGODB_URI)
   .catch((err) => {
     process.exit(1);
   });
+
+module.exports = app;
