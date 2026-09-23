@@ -24,9 +24,12 @@ const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/ecomme
 
 mongoose.connect(MONGODB_URI)
   .then(() => {
-    app.listen(PORT);
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
   })
   .catch((err) => {
+    console.error('Database connection error:', err.message);
     process.exit(1);
   });
 
